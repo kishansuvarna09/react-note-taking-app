@@ -1,11 +1,16 @@
 import React from 'react';
 import { Col, Row, Stack, Badge, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { useNote } from './NoteLayout';
 
-export function Note() {
+type NoteProps = {
+  onDelete: (id: string) => void;
+};
+
+export function Note({ onDelete }: NoteProps) {
   const note = useNote();
+  const navigate = useNavigate();
   return (
     <>
       <Row className="align-items-center mb-4">
@@ -30,7 +35,15 @@ export function Note() {
             <Link to={`/${note.id}/edit`}>
               <Button variant="primary">Edit</Button>
             </Link>
-            <Button variant="outline-danger">Delete</Button>
+            <Button
+              variant="outline-danger"
+              onClick={() => {
+                onDelete(note.id);
+                navigate('/');
+              }}
+            >
+              Delete
+            </Button>
             <Link to="/">
               <Button variant="outline-secondary">Back</Button>
             </Link>
