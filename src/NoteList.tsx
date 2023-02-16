@@ -189,7 +189,7 @@ function EditTagsModal({
         <Form>
           <Stack gap={2}>
             {availableTags.map((tag) => (
-              <Row ley={tag.id}>
+              <Row key={tag.id}>
                 <Col>
                   <Form.Control
                     type="text"
